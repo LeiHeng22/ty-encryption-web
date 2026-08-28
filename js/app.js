@@ -92,7 +92,7 @@
       }
       var expiry = document.getElementById("expiry").value;
       if (!expiry) {
-        setStatus("请选择授权有效期。", true);
+        setStatus("请选择有效期。", true);
         return;
       }
       var flags = collectFeatureFlags();
