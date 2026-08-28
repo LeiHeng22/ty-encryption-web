@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>太原授权 · 贯标加密 SQL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="brand">
+        <p class="brand-mark">太原授权工具</p>
+        <h1>贯标编码批量加密</h1>
+        <p class="lede">
+          与桌面版相同算法。每行一个贯标编码，勾选功能后一键生成合并 UPDATE SQL。
+        </p>
+      </header>
+
+      <main class="workspace">
+        <section class="panel panel-input" aria-labelledby="input-title">
+          <h2 id="input-title">授权参数</h2>
+
+          <label class="field">
+            <span>贯标机构编码</span>
+            <textarea
+              id="codes"
+              rows="8"
+              placeholder="每行一个贯标编码，例如：&#10;H14010000001&#10;H14010000002"
+              spellcheck="false"
+            ></textarea>
+          </label>
+
+          <label class="field field-inline">
+            <span>授权有效期</span>
+            <input type="date" id="expiry" />
+          </label>
+
+          <fieldset class="features">
+            <legend>功能选项</legend>
+            <label><input type="checkbox" id="feat-pre" /> 事前</label>
+            <label><input type="checkbox" id="feat-mid" /> 事中</label>
+            <label><input type="checkbox" id="feat-rx" /> 电子处方</label>
+            <label><input type="checkbox" id="feat-face" /> 终端刷脸</label>
+            <label><input type="checkbox" id="feat-zy" /> 中医适宜技术</label>
+          </fieldset>
+
+          <div class="actions">
+            <button type="button" class="btn-primary" id="btn-encrypt">
+              生成加密 SQL
+            </button>
+          </div>
+        </section>
+
+        <section class="panel panel-output" aria-labelledby="sql-title">
+          <div class="panel-head">
+            <h2 id="sql-title">合并 SQL</h2>
+            <button type="button" class="btn-ghost" id="btn-copy-sql">复制</button>
+          </div>
+          <textarea
+            id="sql-out"
+            rows="16"
+            readonly
+            spellcheck="false"
+            placeholder="加密后的 UPDATE 语句会出现在这里…"
+          ></textarea>
+
+          <div class="panel-head panel-head-sub">
+            <h3>密文明细</h3>
+            <button type="button" class="btn-ghost" id="btn-copy-detail">复制</button>
+          </div>
+          <textarea
+            id="detail-out"
+            rows="8"
+            readonly
+            spellcheck="false"
+            placeholder="各贯标对应的密文与明文…"
+          ></textarea>
+        </section>
+
+        <section class="panel panel-decrypt" aria-labelledby="decrypt-title">
+          <h2 id="decrypt-title">解密校验</h2>
+          <label class="field">
+            <span>密文</span>
+            <textarea id="decrypt-in" rows="4" spellcheck="false"></textarea>
+          </label>
+          <div class="actions">
+            <button type="button" class="btn-secondary" id="btn-decrypt">解密</button>
+          </div>
+          <label class="field">
+            <span>明文</span>
+            <textarea id="decrypt-out" rows="4" readonly spellcheck="false"></textarea>
+          </label>
+        </section>
+      </main>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </div>
+
+    <script src="js/base64util.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
